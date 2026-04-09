@@ -37,6 +37,9 @@ class Category:
             return False
         
 food = Category('Food')
+# create object in the ledger instance variable
 food.deposit(1000, 'initial deposit')
 food.withdraw(10.15, 'groceries')
-# create object in the ledger instance variable
+food.withdraw(15.89, 'restaurant and more food for dessert')
+clothing = Category('Clothing')
+food.transfer(50, clothing)
