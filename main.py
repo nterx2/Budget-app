@@ -24,8 +24,11 @@ class Category:
         return sum(item['amount'] for item in self.ledger)
     
     def transfer(self, amount, destination):
-        self.withdraw(amount, f"Transfer to {destination.name}")
-        destination.doposit(amount, f"Transfer from {self.name}")
+        if self.check_funds(amount):
+            self.withdraw(amount, f"Transfer to {destination.name}")
+            destination.doposit(amount, f"Transfer from {self.name}")
+            return True
+        return False
         
     def check_funds(self, amount):
         if self.get_balance() >= amount:
