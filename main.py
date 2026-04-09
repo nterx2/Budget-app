@@ -19,6 +19,10 @@ class Category:
     
     def get_balance(self):
         return sum(item['amount'] for item in self.ledger)
+    
+    def transfer(self, amount, destination):
+        self.withdraw(amount, f"Transfer to {destination.name}")
+        destination.doposit(amount, f"Transfer from {self.name}")
         
 food = Category('Food')
 food.deposit(1000, 'initial deposit')
