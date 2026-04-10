@@ -26,7 +26,7 @@ class Category:
     def transfer(self, amount, destination):
         if self.check_funds(amount):
             self.withdraw(amount, f"Transfer to {destination.name}")
-            destination.doposit(amount, f"Transfer from {self.name}")
+            destination.deposit(amount, f"Transfer from {self.name}")
             return True
         return False
         
@@ -43,3 +43,6 @@ food.withdraw(10.15, 'groceries')
 food.withdraw(15.89, 'restaurant and more food for dessert')
 clothing = Category('Clothing')
 food.transfer(50, clothing)
+print(f"{food.name:*^30}")
+for item in food.ledger:
+    print(f"{item['description']:<23.23}{item['amount']:>7.2f}")
