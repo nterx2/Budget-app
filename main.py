@@ -35,6 +35,13 @@ class Category:
             return True
         else:
             return False
+    
+    def __str__(self):
+        output = f"{self.name:*^30}\n"
+        for item in self.ledger:
+            output += f"{item['description']:<23.23}{item['amount']:>7.2f}\n"
+        output += f"Total: {self.get_balance()}"
+        return output
         
 food = Category('Food')
 # create object in the ledger instance variable
@@ -43,6 +50,4 @@ food.withdraw(10.15, 'groceries')
 food.withdraw(15.89, 'restaurant and more food for dessert')
 clothing = Category('Clothing')
 food.transfer(50, clothing)
-print(f"{food.name:*^30}")
-for item in food.ledger:
-    print(f"{item['description']:<23.23}{item['amount']:>7.2f}")
+print(food)
