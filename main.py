@@ -40,14 +40,15 @@ class Category:
         output = f"{self.name:*^30}\n"
         for item in self.ledger:
             output += f"{item['description']:<23.23}{item['amount']:>7.2f}\n"
-        output += f"Total: {self.get_balance()}"
+        output += f"Total: {self.get_balance():.2f}"
         return output
         
 food = Category('Food')
 # create object in the ledger instance variable
-food.deposit(1000, 'initial deposit')
-food.withdraw(10.15, 'groceries')
-food.withdraw(15.89, 'restaurant and more food for dessert')
+food.deposit(1000, 'deposit')
+food.withdraw(274.2, 'meat cereal chocolate, milk, washing powder, wine')
 clothing = Category('Clothing')
-food.transfer(50, clothing)
+clothing.withdraw(91.4, 'T-shirt')
+auto = Category('Auto')
+food.transfer(45.7, auto)
 print(food)
