@@ -35,20 +35,26 @@ class Category:
             return True
         else:
             return False
-    
+
     def __str__(self):
         output = f"{self.name:*^30}\n"
         for item in self.ledger:
             output += f"{item['description']:<23.23}{item['amount']:>7.2f}\n"
         output += f"Total: {self.get_balance():.2f}"
         return output
-        
+
+def calculate_spent_pencentage(categories):
+        withdrawal = []
+        for category in categories:
+            total_withdraw = sum(abs(item['amount']) for item in Category.ledger if item['amount'] < 0 )
+            withdrawal.append(total_withdraw)
+
 food = Category('Food')
 # create object in the ledger instance variable
 food.deposit(1000, 'deposit')
 food.withdraw(274.2, 'meat cereal chocolate, milk, washing powder, wine')
 clothing = Category('Clothing')
-clothing.withdraw(91.4, 'T-shirt')
+food.transfer(91.4, clothing)
 auto = Category('Auto')
 food.transfer(45.7, auto)
 print(food)
