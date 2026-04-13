@@ -48,6 +48,10 @@ def calculate_spent_pencentage(categories):
         for category in categories:
             total_withdraw = sum(abs(item['amount']) for item in Category.ledger if item['amount'] < 0 )
             withdrawal.append(total_withdraw)
+        total_spend = sum(withdrawal)
+        if total_spend == 0:
+            return [0] * len(categories)
+        
 
 food = Category('Food')
 # create object in the ledger instance variable
