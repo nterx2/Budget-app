@@ -44,13 +44,15 @@ class Category:
         return output
 
 def calculate_spent_pencentage(categories):
-        withdrawal = []
-        for category in categories:
-            total_withdraw = sum(abs(item['amount']) for item in Category.ledger if item['amount'] < 0 )
-            withdrawal.append(total_withdraw)
-        total_spend = sum(withdrawal)
-        if total_spend == 0:
-            return [0] * len(categories)
+    withdrawal = []
+    for category in categories:
+        total_withdraw = sum(abs(item['amount']) for item in category.ledger if item['amount'] < 0 )
+        withdrawal.append(total_withdraw)
+    total_spend = sum(withdrawal)
+    if total_spend == 0:
+        return [0] * len(categories)
+    percentages = [(withdraw / total_spend * 100) // 10 * 10 for withdraw in withdrawal]
+    return percentages
         
 
 food = Category('Food')
@@ -61,4 +63,6 @@ clothing = Category('Clothing')
 food.transfer(91.4, clothing)
 auto = Category('Auto')
 food.transfer(45.7, auto)
+
+category = 
 print(food)
