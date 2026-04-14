@@ -55,14 +55,19 @@ def calculate_spent_pencentage(categories):
     return percentages
         
 
-food = Category('Food')
 # create object in the ledger instance variable
+food = Category('Food')
+clothing = Category('Clothing')
+auto = Category('Auto')
+# calling method of class
 food.deposit(1000, 'deposit')
 food.withdraw(274.2, 'meat cereal chocolate, milk, washing powder, wine')
-clothing = Category('Clothing')
-food.transfer(91.4, clothing)
-auto = Category('Auto')
-food.transfer(45.7, auto)
-
-category = 
+food.withdraw(91.4, 'restaurant')
+food.withdraw(45.7, 'snack, Cola')
+clothing.deposit(500 , 'deposit')
+clothing.withdraw(52.34, 'T-shirt')
+clothing.transfer(75, food)
+auto.deposit(200, 'deposit')
+auto.withdraw(85, 'fuel')
+category = [food, clothing, auto]
 print(food)
