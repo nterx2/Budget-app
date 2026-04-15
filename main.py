@@ -57,7 +57,16 @@ def calculate_spent_pencentage(categories):
 def create_spend_chart(categories):
     percentage = calculate_spent_pencentage(category)
     result = "Percentage spent by category\n"
-        
+    for i in range(100, -1, -10):
+        result += f"{i:>3}| "
+        for p in percentage:
+            if p >= i:
+                result += "o  "
+            else:
+                result += "   "
+        result += "\n"
+    result += "    " + "-" * (len(percentage)* 3 + 1) + "\n"
+    return result
 
 # create object in the ledger instance variable
 food = Category('Food')
@@ -76,3 +85,4 @@ auto.withdraw(85, 'fuel')
 category = [food, clothing, auto]
 names = [cat.name for cat in category]
 print(food)
+print(create_spend_chart(category))
