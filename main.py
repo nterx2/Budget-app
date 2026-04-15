@@ -53,6 +53,10 @@ def calculate_spent_pencentage(categories):
         return [0] * len(categories)
     percentages = [(withdraw / total_spend * 100) // 10 * 10 for withdraw in withdrawal]
     return percentages
+
+def create_spend_chart(categories):
+    percentage = calculate_spent_pencentage(category)
+    result = "Percentage spent by category\n"
         
 
 # create object in the ledger instance variable
@@ -70,4 +74,5 @@ clothing.transfer(75, food)
 auto.deposit(200, 'deposit')
 auto.withdraw(85, 'fuel')
 category = [food, clothing, auto]
+names = [cat.name for cat in category]
 print(food)
