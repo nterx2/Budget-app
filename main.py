@@ -1,7 +1,9 @@
 class Category:
+    all_categories = []
     def __init__(self, name):
         self.name = name
         self.ledger = []
+        Category.all_categories.append(self)
     
     def deposit(self, amount, description=""):
         form = {
@@ -51,12 +53,12 @@ def calculate_spent_pencentage(categories):
     total_spend = sum(withdrawal)
     if total_spend == 0:
         return [0] * len(categories)
-    percentages = [(withdraw / total_spend * 100) // 10 * 10 for withdraw in withdrawal]
+    percentages = [int(withdraw / total_spend * 100) // 10 * 10 for withdraw in withdrawal]
     return percentages
 
 def create_spend_chart(categories):
     percentage = calculate_spent_pencentage(category)
-    names = [cat.name for cat in category]
+    names = [cat.name for cat in categories]
     max_len = max(len(name) for name in names) # use max_len for set round in loop
     result = "Percentage spent by category\n"
     for y in range(100, -1, -10):
@@ -67,19 +69,19 @@ def create_spend_chart(categories):
             else:
                 result += "   "
         result += "\n"
-    result += "    " + "-" * (len(percentage)* 3 + 1) + "\n"
+    result += "    " + "-" * (len(categories)* 3 + 1) + "\n"
 
     for x in range(max_len):
-        row = "     " # space in front of line (5 space)
+        vertical_name = "     " # space in front of line (5 space)
         for name in names:
             if x < len(name):
-                row += f"{name[x]}  " # print character follow sequence
+                vertical_name += f"{name[x]}  " # print character follow sequence
             else:
-                row += "   " # if x index greater than len(name) add 3 space(1 character + 2 space)
+                vertical_name += "   " # if x index greater than len(name) add 3 space(1 character + 2 space)
         if x < max_len - 1:
-            result += row + "\n"
+            result += vertical_name + "\n"
         else:
-            result += row
+            result += vertical_name
     return result
 
 # create object in the ledger instance variable
@@ -96,7 +98,6 @@ clothing.withdraw(52.34, 'T-shirt')
 clothing.transfer(75, food)
 auto.deposit(200, 'deposit')
 auto.withdraw(85, 'fuel')
-category = [food, clothing, auto]
-
-print(food)
+category = Category.all_categories
 print(create_spend_chart(category))
+
